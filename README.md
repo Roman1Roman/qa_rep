@@ -1,2 +1,2 @@
-# qa_rep
+# qa_repo
 pet repo
