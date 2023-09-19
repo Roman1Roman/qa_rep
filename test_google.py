@@ -2,13 +2,13 @@ from selene import be, have, browser
 import pytest
 
 
-def test_negative_search_result(opening_browser_neg):
+def test_result_is_found(scale_window):
+    browser.open('https://google.com')
+    browser.element('[name="q"]').should(be.blank).type('yashaka/selene').press_enter()
+    assert browser.element('[id="search"]').should(have.text('User-oriented Web UI browser tests in Python'))
 
+def test_negative_search_result(scale_window):
+    browser.open('https://google.com')
+    browser.element('[name="q"]').should(be.blank).type('asdasdasfasfgsdagfdsgshfdghbfnjmkmjhdndgfjnfukl').press_enter()
     assert browser.element('[class="card-section"]')\
     .should(have.text('По запросу asdasdasfasfgsdagfdsgshfdghbfnjmkmjhdndgfjnfukl ничего не найдено'))
-
-def test_positive_search_result(search_positive):
-    assert browser.element('[id="search"]').should(have.text('Цифровое производство в Санкт-Петербурге'))
-
-def test_negative_assert_search_result(search_neagative_assert):
-    assert browser.element('[id="search"]').should(have.text('Цифровое производство в Санкт-Петербурге')), 'smth is bad'
